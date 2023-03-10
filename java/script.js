@@ -56,6 +56,10 @@ footerOpenModalBtn.addEventListener("click", () => {
   myMailForm.classList.add(MENU_ACTIVE_CLASS_NAME);
 });
 footerOpenModalBtn.addEventListener("click", () => {
+  document.body.style.top = `-${window.scrollY}px`;
+});
+
+footerOpenModalBtn.addEventListener("click", () => {
   myBody.classList.add(BODY_FiXED_CLASS_NAME);
 });
 
@@ -65,6 +69,12 @@ closeModalBtn.addEventListener("click", () => {
 
 closeModalBtn.addEventListener("click", () => {
   myBody.classList.remove(BODY_FiXED_CLASS_NAME);
+});
+closeModalBtn.addEventListener("click", () => {
+  const scrollY = document.body.style.top;
+  document.body.style.position = "";
+  document.body.style.top = "";
+  window.scrollTo(0, parseInt(scrollY || "0") * -1);
 });
 
 /*button-up*/
@@ -79,3 +89,28 @@ window.addEventListener("scroll", function () {
     myButtonUp.classList.remove(MENU_ACTIVE_CLASS_NAME);
   }
 });
+
+/*soft scroll*/
+/*
+
+about-section-btn about-section
+download-section-btn download-section
+contacts-section-btn contacts-section
+
+
+*/
+
+const anchors = document.querySelectorAll('a[href*="#"]');
+
+for (let anchor of anchors) {
+  anchor.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    const blockID = anchor.getAttribute("href").substr(1);
+
+    document.getElementById(blockID).scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  });
+}

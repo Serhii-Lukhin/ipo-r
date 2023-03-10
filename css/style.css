@@ -576,4 +576,5 @@ nav {
 }
 .stop-scroll {
   position: fixed;
+  padding-right: 15px;
 }
